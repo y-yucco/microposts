@@ -4,11 +4,12 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   
   private
+  
   def logged_in_user
-    unless logged_in?
-      store_location
+    unless logged_in?          #「unless」false場合(ログインしていない)の処理する
+      store_location           #アクセスしているurlを保存
       flash[:dander] = "Please log in."
-      redirect_to login_url
+      redirect_to login_url    #ログイン画面のURLにリダイレク
     end
   end
 end

@@ -11,7 +11,8 @@ module SessionsHelper
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-
+   #||=は左の値がfalseかnilの場合にsession[:user_id]の値に一致するユーザーを左に代入
+   
   def logged_in?
     !!current_user
   end
@@ -20,3 +21,4 @@ module SessionsHelper
     session[:forwarding_url] = request.url if request.get?
   end
 end
+  #リクエストがもしGETの場合リクエストのURLをforwardingに保存しておく

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  def show 
+  before_action :check_user, only: [:edit, :update]
+  
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.order(created_at: :desc) #oder取得した値を並び替え desc降順
   end
   
   def edit 
@@ -23,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "welcome to the Sample App!"
-      redirect_to @user
+      redirect_to @user 
     else
       render'new'
     end
@@ -41,4 +45,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  def check_user
+    if @user != current_user
+      redirect_to root_url
+    end
+  end
 end

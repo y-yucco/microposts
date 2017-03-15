@@ -1,9 +1,20 @@
-<div class="col-md-6 col-md-offset-3">
-  <h1>
-    <%= gravatar_for @user %>
-    <%= @user.name %><br>
-  </h1>
-  <p><span class="label label-info">年齢</span> <%= @user.age %>才</p>
-  <p><span class="label label-info">プロフィール</span> <%= @user.profile %></p>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %><br>
+      </h1>
+      <p><span class="label label-info">年齢</span> <%= @user.age %>才</p>
+      <p><span class="label label-info">プロフィール</span> <%= @user.profile %></p>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @user.microposts.any? %>  <!-- any=モデルが空ならtrueを返す-->
+      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %><!--/_micropost.html.erbを順番に渡してる？-->
+      </ol>
+    <% end %>
+  </div>
 </div>
-
