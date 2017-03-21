@@ -1,14 +1,5 @@
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %><br>
-      </h1>
-      <p><span class="label label-info">年齢</span> <%= @user.age %>才</p>
-      <p><span class="label label-info">プロフィール</span> <%= @user.profile %></p>
-    </section>
-  </aside>
+  <%= render 'asidebar' %>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>                               <!-- any=モデルが空ならtrueを返す-->
